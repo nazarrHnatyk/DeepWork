@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepWork.ai — Daily Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <a class="logo" href="#">
+                <span class="logo-icon">✦</span>
+                <span>DeepWork<span class="logo-dot">.ai</span></span>
+            </a>
+
+            <p class="sidebar-label">WORKSPACE</p>
+
+            <nav class="navigation">
+                <a class="nav-item active" href="#dashboard">
+                    <span>▦</span> Dashboard
+                </a>
+                <a class="nav-item" href="#tasks">
+                    <span>✓</span> My Tasks
+                </a>
+                <a class="nav-item" href="#schedule">
+                    <span>◷</span> Daily Schedule
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="focus-card">
+                    <span class="focus-icon">✧</span>
+                    <h3>Stay focused</h3>
+                    <p>Small steps every day lead to big results.</p>
+                </div>
+                <p class="sidebar-footer">Simple planning. Better focus.</p>
+            </div>
+        </aside>
+
+        <main class="main-content" id="dashboard">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+                    <h1>Good day! <span class="wave">✦</span></h1>
+                    <p class="subtitle">Plan your day. Focus on what matters.</p>
+                </div>
+                <div class="date-badge">
+                    <span>◷</span>
+                    <span id="today">Today</span>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Total tasks</span>
+                        <span class="stat-icon purple">▤</span>
+                    </div>
+                    <p class="stat-number" id="total">0</p>
+                    <p class="stat-note">Tasks planned for today</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-icon green">✓</span>
+                    </div>
+                    <p class="stat-number" id="completed">0</p>
+                    <p class="stat-note">Tasks you've finished</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span class="stat-label">Daily progress</span>
+                        <span class="stat-icon orange">↗</span>
+                    </div>
+                    <p class="stat-number"><span id="progress">0</span><span class="percent">%</span></p>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="content-grid">
+                <div class="panel tasks-panel" id="tasks">
+                    <div class="panel-header">
+                        <div>
+                            <h2>My Tasks</h2>
+                            <p class="panel-subtitle">Make every hour count.</p>
+                        </div>
+                        <span class="count-badge" id="taskCount">0 tasks</span>
+                    </div>
+
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="taskName">Task name</label>
+                            <input
+                                type="text"
+                                id="taskName"
+                                placeholder="e.g. Study English"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startTime">Start time</label>
+                                <input type="time" id="startTime" value="09:00" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endTime">End time</label>
+                                <input type="time" id="endTime" value="10:00" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority">
+                                <option value="high">High priority</option>
+                                <option value="medium" selected>Medium priority</option>
+                                <option value="low">Low priority</option>
+                            </select>
+                        </div>
+
+                        <p class="message" id="message" role="status" aria-live="polite"></p>
+
+                        <button class="primary-button" type="submit">
+                            <span>+</span> Add task
+                        </button>
+                    </form>
+
+                    <div class="list-heading">
+                        <h3>Your task list</h3>
+                    </div>
+
+                    <div id="taskList" class="task-list">
+                        <div class="empty-state">
+                            <span class="empty-icon">✧</span>
+                            <p>No tasks yet</p>
+                            <span>Add your first task to get started.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel schedule-panel" id="schedule">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Daily Schedule</h2>
+                            <p class="panel-subtitle">Your day, organized.</p>
+                        </div>
+                        <button
+                            class="refresh-button"
+                            id="refreshSchedule"
+                            type="button"
+                            title="Refresh schedule"
+                            aria-label="Refresh schedule"
+                        >↻</button>
+                    </div>
+
+                    <div class="schedule-summary">
+                        <span class="summary-dot"></span>
+                        <span>Your upcoming tasks</span>
+                    </div>
+
+                    <div id="scheduleList" class="schedule-list">
+                        <div class="empty-state">
+                            <span class="empty-icon">◷</span>
+                            <p>Your schedule is empty</p>
+                            <span>Add a task to plan your day.</span>
+                        </div>
+                    </div>
+
+                    <div class="schedule-tip">
+                        <span>✦</span>
+                        <div>
+                            <strong>Quick tip</strong>
+                            <p>Leave a little time between demanding tasks to recharge.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <span>DeepWork.ai</span>
+                <span>Make time for what matters.</span>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
